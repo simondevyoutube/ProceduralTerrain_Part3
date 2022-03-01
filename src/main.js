@@ -1,16 +1,11 @@
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.112.1/build/three.module.js';
 import {GUI} from 'https://cdn.jsdelivr.net/npm/three@0.112.1/examples/jsm/libs/dat.gui.module.js';
-import {controls} from './controls.js';
-import {game} from './game.js';
-import {sky} from './sky.js';
-import {terrain} from './terrain.js';
+import {FPSControls} from './controls.js';
+import {Game} from './game.js';
+import {TerrainSky} from './sky.js';
+import {TerrainChunkManager} from './terrain.js';
 
-
-let _APP = null;
-
-
-
-class ProceduralTerrain_Demo extends game.Game {
+class ProceduralTerrain_Demo extends Game {
   constructor() {
     super();
   }
@@ -21,21 +16,21 @@ class ProceduralTerrain_Demo extends game.Game {
     this._userCamera = new THREE.Object3D();
     this._userCamera.position.set(475, 75, 900);
 
-    this._entities['_terrain'] = new terrain.TerrainChunkManager({
+    this._entities['_terrain'] = new TerrainChunkManager({
       camera: this._userCamera,
       scene: this._graphics.Scene,
       gui: this._gui,
       guiParams: this._guiParams,
     });
 
-    this._entities['_sky'] = new sky.TerrainSky({
+    this._entities['_sky'] = new TerrainSky({
       camera: this._graphics.Camera,
       scene: this._graphics.Scene,
       gui: this._gui,
       guiParams: this._guiParams,
     });
 
-    this._entities['_controls'] = new controls.FPSControls(
+    this._entities['_controls'] = new FPSControls(
       {
         scene: this._graphics.Scene,
         camera: this._userCamera
@@ -68,8 +63,9 @@ class ProceduralTerrain_Demo extends game.Game {
 }
 
 
-function _Main() {
-  _APP = new ProceduralTerrain_Demo();
+function main() {
+  // Expose on window
+  window.app = new ProceduralTerrain_Demo();
 }
 
-_Main();
+main();
