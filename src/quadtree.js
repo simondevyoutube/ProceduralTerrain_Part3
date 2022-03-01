@@ -1,11 +1,10 @@
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.112.1/build/three.module.js';
 
 
-export const quadtree = (function() {
 
   const _MIN_NODE_SIZE = 500;
 
-  class QuadTree {
+  export class QuadTree {
     constructor(params) {
       const b = new THREE.Box2(params.min, params.max);
       this._root = {
@@ -85,8 +84,3 @@ export const quadtree = (function() {
       return children;
     }
   }
-
-  return {
-    QuadTree: QuadTree
-  }
-})();

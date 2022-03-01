@@ -3,7 +3,6 @@ import perlin from 'https://cdn.jsdelivr.net/gh/mikechambers/es6-perlin-module/p
 
 import {math} from './math.js';
 
-export const noise = (function() {
 
   class _PerlinWrapper {
     constructor() {
@@ -49,7 +48,7 @@ export const noise = (function() {
     }
   }
 
-  class _NoiseGenerator {
+  export class Noise {
     constructor(params) {
       this._params = params;
       this._Init();
@@ -86,7 +85,3 @@ export const noise = (function() {
     }
   }
 
-  return {
-    Noise: _NoiseGenerator
-  }
-})();
